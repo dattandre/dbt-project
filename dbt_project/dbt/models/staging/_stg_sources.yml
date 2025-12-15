@@ -1,0 +1,18 @@
+sources:
+  - name: test_data
+    schema: raw
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+    loaded_at_field: updated_at
+
+    tables:
+      - name: patients
+      - name: conditions
+      - name: documents
+      - name: med_admins
+      - name: medications
+      - name: orders
+      - name: patient_conditions
+      - name: visits
+    

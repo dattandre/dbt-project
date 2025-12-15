@@ -1,0 +1,111 @@
+models:
+
+## ER TEST
+
+  - name: stg_patient_conditions
+    columns:
+      - name: patient_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_patients')
+              parent_field: patient_id
+      - name: condition_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_conditions')
+              parent_field: conditions_id
+
+
+  - name: stg_documents
+    columns:
+      - name: patient_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_patients')
+              parent_field: patient_id
+      - name: visit_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_visits')
+              parent_field: visits_id
+
+
+  - name: stg_med_admins
+    columns:
+      - name: patient_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_patients')
+              parent_field: patient_id
+      - name: patient_condition_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_patient_conditions')
+              parent_field: patient_conditions_id
+      - name: medication_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_medications')
+              parent_field: medications_id
+
+
+  - name: stg_orders
+    columns:
+      - name: patient_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_patients')
+              parent_field: patient_id
+      - name: condition_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_conditions')
+              parent_field: conditions_id
+
+
+  - name: stg_visits
+    columns:
+      - name: patient_condition_id
+        tests:
+          - relationship_test:
+              parent_model: ref('stg_patient_conditions')
+              parent_field: patient_conditions_id
+
+## UNIQUE TEST
+
+  - name: stg_medications
+    columns:
+      - name: medications_id
+        tests:
+          - unique_test
+      - name: name
+        tests:
+          - string_not_empty
+
+  - name: stg_conditions
+    columns:
+      - name: conditions_id
+        tests:
+          - unique_test
+      - name: name
+        tests:
+          - string_not_empty
+
+  - name: stg_patients
+    columns:
+      - name: patient_id
+        tests:
+          - unique_test
+      - name: first_name
+        tests:
+          - string_not_empty
+      - name: last_name
+        tests:
+          - string_not_empty
+
+
+
+
+
+
+

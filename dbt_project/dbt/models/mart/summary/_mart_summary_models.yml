@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: patients_by_age
+  - name: medications_per_month
+  - name: patients_per_month
+  - name: patient_results
+  - name: anomalies
